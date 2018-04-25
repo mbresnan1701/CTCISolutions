@@ -42,14 +42,11 @@ public class ChapterOne {
     str0 = new String(charArrayStr0);
     str1 = new String(charArrayStr1);
 
-    // Loop and compare each character of both strings
-    for(int i = 0; i < str0.length(); i++) {
-      if(str0.charAt(i) != str1.charAt(i)) {
-        return false;
-      }
-    }
-    return true;
+    // Compare sorted strings
+    return str0.equals(str1);
 
     // Time complexity: O(n log n) on the sorts, O(n) on the comparison
+    // The assumption was made that case and whitespace were unimportant
+    // However it's simple enough to do with a String.toLowerCase() call and some whitespace regex.
   }
 }
