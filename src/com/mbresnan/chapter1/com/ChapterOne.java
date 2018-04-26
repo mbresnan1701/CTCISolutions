@@ -49,4 +49,14 @@ public class ChapterOne {
     // The assumption was made that case and whitespace were unimportant
     // However it's simple enough to do with a String.toLowerCase() call and some whitespace regex.
   }
+
+  // 1.3 Write a method to replace all spaces in a string with "%20". You may assume the string has sufficient
+  // space to hold the additional characters, and you are given the "true" length of the string.
+  public String urlify(String str) {
+    // The book wants me to use a char array, but it's simpler to do it via regex.
+    // At least, it is for the example input, which seems to be very specifically formatted, so not too concerned with
+    // the edge cases
+    return str.replaceAll("\\b\\s+\\b", "%20");
+  }
+
 }
