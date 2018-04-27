@@ -1,6 +1,8 @@
 package com.mbresnan.chapter1.com;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
 
 public class ChapterOne {
 
@@ -8,7 +10,7 @@ public class ChapterOne {
 
   // 1.1 Implement an algo to determine if a string has all unique characters.
   // What if you cannot use additional data structures?
-  public boolean isUnique(String str) {
+  public static boolean isUnique(String str) {
     // O(n) solution is to create a hashmap of visited characters while looping through the string
     // With no additional data structures though, will have to be more inefficient. Following is O(n^2):
 
@@ -24,9 +26,9 @@ public class ChapterOne {
   }
 
   // 1.2 Given two strings, write a method to determine if one is a permutation of the other
-  public boolean isPermutation(String str0, String str1) {
+  public static boolean isPermutation(String str0, String str1) {
     // First, return if lengths are not equal. Or empty strings.
-    if (str0.length() != str1.length() || str0.length() == 0 || str1.length() == 0) {
+    if (str0.length() != str1.length() || str0.length() == 0) {
       return false;
     }
     // Next, lets make a character array, sort it, and compare linearly
@@ -52,11 +54,49 @@ public class ChapterOne {
 
   // 1.3 Write a method to replace all spaces in a string with "%20". You may assume the string has sufficient
   // space to hold the additional characters, and you are given the "true" length of the string.
-  public String urlify(String str) {
+  public static String urlify(String str) {
     // The book wants me to use a char array, but it's simpler to do it via regex.
     // At least, it is for the example input, which seems to be very specifically formatted, so not too concerned with
     // the edge cases
     return str.replaceAll("\\b\\s+\\b", "%20");
   }
 
+  // 1.4 Given a string, write a function to check if it is a permutation of a palindrome
+  public static boolean palindromePermutation(String str) {
+    // Initial thought here is to create a hashmap with a count of each letter
+    // If the string is even length, all char counts should be divisible by 2.
+    // If odd len, only 1 char can have an odd length
+    HashMap chars = new HashMap();
+    str = str.toLowerCase();
+
+    // Populate the map
+    for(int i = 0; i < str.length(); i++) {
+      char letter = str.charAt(i);
+
+      // If it's not whitespace, add to map
+      if(!String.valueOf(letter).equals(" ")) {
+        int newCount = chars.containsKey(letter) ? (int) chars.get(letter) + 1 : 1;
+        chars.put(letter, newCount);
+      }
+
+    }
+
+    Object[] values = chars.values().toArray();
+    boolean hasSeenOdd = false;
+
+    for(int j = 0; j < values.length; j++) {
+      boolean valueIsOdd = (int) values[j] % 2 != 0;
+      if(valueIsOdd) {
+        if(hasSeenOdd) {
+          return false;
+        }
+        hasSeenOdd = true;
+      }
+    }
+
+    return true;
+
+    // This works in O(n) time, though it does take up more space than I'd like.
+    // I feel there are improvements here to make, but it's dinner time, so I'll come back to this one(maybe).
+  }
 }
