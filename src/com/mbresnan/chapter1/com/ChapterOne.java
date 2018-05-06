@@ -99,4 +99,61 @@ public class ChapterOne {
     // This works in O(n) time, though it does take up more space than I'd like.
     // I feel there are improvements here to make, but it's dinner time, so I'll come back to this one(maybe).
   }
+
+  // 1.5 There are three types of edits that can be performed on strings: insert a character, remove a character,
+  // or replace a character. Given two strings, write a function to check if they are zero or one edit away
+  // pale, ple = true | pales, pale = true | pale, bale = true | pale, bake = false
+  public static boolean isOneAway(String str0, String str1) {
+    if (str0 == null || str1 == null || Math.abs(str0.length() - str1.length()) > 1 ) {
+      return false;
+    }
+
+    if (str0.length() == str1.length()) {
+      // Replace case
+      // Both strings same length; Iterate through the strings, max 1 difference
+      int diffCounter = 0;
+      for(int i = 0; i < str0.length(); i++) {
+        if(str0.charAt(i) != str1.charAt(i)) {
+          diffCounter++;
+          if(diffCounter > 1) {
+            return false;
+          }
+        }
+      }
+      return true;
+    } else {
+      // Insert or delete case
+      // Always treat as the delete case
+      // Attempt deletion on every letter and see if they match
+      String string0 = str0;
+      String string1 = str1;
+      if(string1.length() > string0.length()) {
+        // Lets always use str0 as the longer string. If str1 is longer, flip them
+        String tempStr = string0;
+        string0 = string1;
+        string1 = tempStr;
+      }
+
+      for(int i = 0; i < string0.length(); i++) {
+        if((string0.substring(0, i) + string0.substring(i+1)).equals(string1)) {
+          return true;
+        }
+      }
+      return false;
+    }
+    // Time & space complexity in replace case is O(n), delete/insert case is O(n) on paper
+    // but will be more inefficient due to creating tons of extra strings, and potentially doing the swap
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
