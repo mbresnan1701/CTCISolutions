@@ -123,26 +123,33 @@ public class ChapterOne {
       return true;
     } else {
       // Insert or delete case
-      // Always treat as the delete case
+      // Always treat as the delete case since they are inverse of each other
       // Attempt deletion on every letter and see if they match
+
       String string0 = str0;
       String string1 = str1;
-      if(string1.length() > string0.length()) {
-        // Lets always use str0 as the longer string. If str1 is longer, flip them
+      if(string0.length() > string1.length()) {
         String tempStr = string0;
         string0 = string1;
         string1 = tempStr;
       }
 
-      for(int i = 0; i < string0.length(); i++) {
-        if((string0.substring(0, i) + string0.substring(i+1)).equals(string1)) {
-          return true;
+      int idx0 = 0;
+      int idx1 = 0;
+      while (idx0 < string0.length() && idx1 < string1.length()) {
+        if(string0.charAt(idx0) != string1.charAt(idx1)) {
+          if(idx0 != idx1) {
+            return false;
+          }
+          idx1++;
+        } else {
+          idx0++;
+          idx1++;
         }
       }
-      return false;
+      return true;
     }
-    // Time & space complexity in replace case is O(n), delete/insert case is O(n) on paper
-    // but will be more inefficient due to creating tons of extra strings, and potentially doing the swap
+    // Time & space complexity is O(n)
   }
 
 }
