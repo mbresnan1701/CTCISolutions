@@ -152,6 +152,42 @@ public class ChapterOne {
     // Time & space complexity is O(n)
   }
 
+  // 1.6 Implement a method to perform basic string compression using the counts of repeated chars.
+  // Ex. aabcccccaaa would become a2b1c5a3. If the "compressed" string would not become smaller than
+  // the original string, return the original string. You can assume the string has only uppercase and lowercase letters
+  public static String strCompression(String str) {
+    if (str.length() <= 2) {
+      return str;
+    }
+
+    String compStr = "";
+    char currentLetter = str.charAt(0);
+    int count = 1;
+
+
+    // iterate through the string. If char is same as before, increment count, otherwise append to the result
+    int i = 1;
+    while (i < str.length()) {
+      char newLetter = str.charAt(i);
+
+      if(newLetter == currentLetter) {
+        count++;
+      } else {
+        compStr += Character.toString(currentLetter) + count;
+        currentLetter = newLetter;
+        count = 1;
+      }
+      i++;
+    }
+
+    // We've finished the iteration, add whatever letter and count we have to the result
+    compStr += Character.toString(currentLetter) + count;
+
+
+    return compStr.length() < str.length() ? compStr : str;
+    // Time complexity O(n)
+  }
+
 }
 
 
