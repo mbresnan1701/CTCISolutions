@@ -239,10 +239,10 @@ public class ChapterOne {
 
     int n = matrix.length;
 
-    for(int i = 0; i < n / 2; i++) {
+    for (int i = 0; i < n / 2; i++) {
       int startIndex = i;
       int endIndex = n - 1 - i;
-      for(int j = startIndex; j < endIndex; j++) {
+      for (int j = startIndex; j < endIndex; j++) {
         int offset = j - startIndex;
         // Save top value
         int temp = matrix[startIndex][j];
@@ -263,6 +263,44 @@ public class ChapterOne {
 
     return matrix;
     // Time complexity is O(n^2) and I don't think you can do any better
+  }
+
+  // 1.8 Write an algo such that if an element in an MxN matrix is 0, its entire row and column are set to 0
+  public static int[][] zeroMatrix(int[][] matrix) {
+    // Iterate through the matrix. Note rows and columns of zero, then replace values with 0
+    int m = matrix.length;
+    int n = matrix[0].length;
+    HashMap rows = new HashMap();
+    HashMap columns = new HashMap();
+
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (matrix[i][j] == 0) {
+          rows.put(i, true);
+          columns.put(j, true);
+        }
+      }
+    }
+
+    // Replace rows
+    for(Object key : rows.keySet()) {
+      for(int i = 0; i < n; i++) {
+        matrix[(int)key][i] = 0;
+      }
+    }
+
+    // Replace columns
+    for(Object key : columns.keySet()) {
+      for(int i = 0; i < m; i++) {
+        matrix[i][(int) key] = 0;
+      }
+    }
+
+    return matrix;
+    // Feels like too many for loops. Not sure if they're replaceable though. We need to loop and get the rows/columns
+    // We also need to loop to replace the values.
+    // Also, the hashmap may or may not be the most efficient structure to store our rows/columns
+    // Time complexity is O(n^2)
   }
 
 }
