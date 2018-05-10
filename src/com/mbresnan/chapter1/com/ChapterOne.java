@@ -6,7 +6,8 @@ import java.util.HashMap;
 
 public class ChapterOne {
 
-  public ChapterOne() {}
+  public ChapterOne() {
+  }
 
   // 1.1 Implement an algo to determine if a string has all unique characters.
   // What if you cannot use additional data structures?
@@ -14,8 +15,8 @@ public class ChapterOne {
     // O(n) solution is to create a hashmap of visited characters while looping through the string
     // With no additional data structures though, will have to be more inefficient. Following is O(n^2):
 
-    for(int i = 0; i < str.length() - 1; i++) {
-      if(str.indexOf(str.charAt(i), i + 1) != -1) {
+    for (int i = 0; i < str.length() - 1; i++) {
+      if (str.indexOf(str.charAt(i), i + 1) != -1) {
         return false;
       }
     }
@@ -70,11 +71,11 @@ public class ChapterOne {
     str = str.toLowerCase();
 
     // Populate the map
-    for(int i = 0; i < str.length(); i++) {
+    for (int i = 0; i < str.length(); i++) {
       char letter = str.charAt(i);
 
       // If it's not whitespace, add to map
-      if(!String.valueOf(letter).equals(" ")) {
+      if (!String.valueOf(letter).equals(" ")) {
         int newCount = chars.containsKey(letter) ? (int) chars.get(letter) + 1 : 1;
         chars.put(letter, newCount);
       }
@@ -84,10 +85,10 @@ public class ChapterOne {
     Object[] values = chars.values().toArray();
     boolean hasSeenOdd = false;
 
-    for(int j = 0; j < values.length; j++) {
+    for (int j = 0; j < values.length; j++) {
       boolean valueIsOdd = (int) values[j] % 2 != 0;
-      if(valueIsOdd) {
-        if(hasSeenOdd) {
+      if (valueIsOdd) {
+        if (hasSeenOdd) {
           return false;
         }
         hasSeenOdd = true;
@@ -104,7 +105,7 @@ public class ChapterOne {
   // or replace a character. Given two strings, write a function to check if they are zero or one edit away
   // pale, ple = true | pales, pale = true | pale, bale = true | pale, bake = false
   public static boolean isOneAway(String str0, String str1) {
-    if (str0 == null || str1 == null || Math.abs(str0.length() - str1.length()) > 1 ) {
+    if (str0 == null || str1 == null || Math.abs(str0.length() - str1.length()) > 1) {
       return false;
     }
 
@@ -112,10 +113,10 @@ public class ChapterOne {
       // Replace case
       // Both strings same length; Iterate through the strings, max 1 difference
       int diffCounter = 0;
-      for(int i = 0; i < str0.length(); i++) {
-        if(str0.charAt(i) != str1.charAt(i)) {
+      for (int i = 0; i < str0.length(); i++) {
+        if (str0.charAt(i) != str1.charAt(i)) {
           diffCounter++;
-          if(diffCounter > 1) {
+          if (diffCounter > 1) {
             return false;
           }
         }
@@ -128,7 +129,7 @@ public class ChapterOne {
 
       String string0 = str0;
       String string1 = str1;
-      if(string0.length() > string1.length()) {
+      if (string0.length() > string1.length()) {
         String tempStr = string0;
         string0 = string1;
         string1 = tempStr;
@@ -137,8 +138,8 @@ public class ChapterOne {
       int idx0 = 0;
       int idx1 = 0;
       while (idx0 < string0.length() && idx1 < string1.length()) {
-        if(string0.charAt(idx0) != string1.charAt(idx1)) {
-          if(idx0 != idx1) {
+        if (string0.charAt(idx0) != string1.charAt(idx1)) {
+          if (idx0 != idx1) {
             return false;
           }
           idx1++;
@@ -170,7 +171,7 @@ public class ChapterOne {
     while (i < str.length()) {
       char newLetter = str.charAt(i);
 
-      if(newLetter == currentLetter) {
+      if (newLetter == currentLetter) {
         count++;
       } else {
         compStr += Character.toString(currentLetter) + count;
@@ -186,6 +187,82 @@ public class ChapterOne {
 
     return compStr.length() < str.length() ? compStr : str;
     // Time complexity O(n)
+  }
+
+  // 1.7 Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes,
+  // write a method to rotate the image by 90 degrees. Can you do this in place?
+  // [[1, 2, 3]
+  //  [4, 5, 6]
+  //  [7, 8, 9]]
+
+  // [[1, 1, 1, 1]
+  //  [2, 2, 2, 2]
+  //  [3, 3, 3, 3]
+  //  [4, 4, 4, 4]
+
+  // [[1, 1, 1, 1, 1]
+  //  [2, 2, 2, 2, 2]
+  //  [3, 3, 3, 3, 3]
+  //  [4, 4, 4, 4, 4]
+  //  [5, 5, 5, 5, 5]
+
+  // [[1, 2, 3]
+  //  [4, 5, 6]
+  //  [7, 8, 9]]
+
+  public static void printMat(int[][] matrix) {
+    for (int i = 0; i < matrix.length; i++) {
+      for (int j = 0; j < matrix[i].length; j++) {
+        System.out.print(matrix[i][j] + " ");
+      }
+      System.out.println();
+    }
+    System.out.println();
+
+  }
+
+  public static void printTemp(int[] temp) {
+    for (int j = 0; j < temp.length; j++) {
+      System.out.print(temp[j] + " ");
+    }
+    System.out.println();
+    System.out.println();
+  }
+
+  public static int[][] rotateMatrix(int[][] matrix) {
+    // So we need to rotate the layers. A layer would be the outer most values in the above example, but
+    // we may have many layers with a larger N. We need to rotate by swapping values within the layer,
+    // then do the same for the inner layers until we've swapped every layer.
+    if (matrix.length <= 1) {
+      return matrix;
+    }
+
+    int n = matrix.length;
+
+    for(int i = 0; i < n / 2; i++) {
+      int startIndex = i;
+      int endIndex = n - 1 - i;
+      for(int j = startIndex; j < endIndex; j++) {
+        int offset = j - startIndex;
+        // Save top value
+        int temp = matrix[startIndex][j];
+
+        // Left value to top value
+        matrix[startIndex][j] = matrix[endIndex - offset][startIndex];
+
+        // Bottom value to left value
+        matrix[endIndex - offset][startIndex] = matrix[endIndex][endIndex - offset];
+
+        // Right value to bottom value
+        matrix[endIndex][endIndex - offset] = matrix[j][endIndex];
+
+        // Top value to right value
+        matrix[j][endIndex] = temp;
+      }
+    }
+
+    return matrix;
+    // Time complexity is O(n^2) and I don't think you can do any better
   }
 
 }
