@@ -1,17 +1,28 @@
 import com.mbresnan.chapter1.com.ChapterOne;
+import com.mbresnan.chapter2.com.ChapterTwo;
+import com.mbresnan.library.com.LinkedListNode;
 
 public class Main {
 
   public static void main(String[] args) {
     ChapterOne cp1 = new ChapterOne();
-    int[][] a = {{0, 1, 1}, {1, 1, 1}, {1, 0, 1}, {1, 1, 1}};
-    int[][] b = cp1.zeroMatrix(a);
+    ChapterTwo cp2 = new ChapterTwo();
 
-    for (int i = 0; i < b.length; i++) {
-      for (int j = 0; j < b[i].length; j++) {
-        System.out.print(b[i][j] + " ");
-      }
-      System.out.println();
+    LinkedListNode a = new LinkedListNode(1);
+    LinkedListNode b = new LinkedListNode(1);
+    LinkedListNode c = new LinkedListNode(2);
+    LinkedListNode d = new LinkedListNode(3);
+
+    a.setNext(b);
+    b.setNext(c);
+    c.setNext(d);
+
+    cp2.removeDupes(a);
+    LinkedListNode currNode = a;
+
+    while (currNode != null) {
+      System.out.println(currNode.data);
+      currNode = currNode.next;
     }
   }
 }
