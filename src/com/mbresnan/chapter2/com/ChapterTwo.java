@@ -106,4 +106,20 @@ public class ChapterTwo {
     }
     return count;
   }
+
+  // 2.3 Implement and algo to delete a node in the middle (ie any node but first and last but
+  // not necessarily the exact middle) of a SLL given only access to that node
+  public static void deleteMiddleNode(LinkedListNode node) {
+    // Since we cannot update the ref to this node in the prev node, we cannot "delete" it.
+    // We'll have to update the list in place and then delete the final element
+    LinkedListNode currentNode = node;
+    while (currentNode != null) {
+      currentNode.data = currentNode.next.data;
+      if(currentNode.next.next == null) {
+        currentNode.next = null;
+      }
+      currentNode = currentNode.next;
+    }
+    // Time complexity O(n). Have to iterate through all elements of the remaining list
+  }
 }

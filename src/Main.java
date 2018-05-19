@@ -25,13 +25,13 @@ public class Main {
     f.setNext(g);
     g.setNext(h);
 
-    LinkedListNode result = cp2.kthToLast(a, 2);
-//    LinkedListNode currNode = a;
-//
-//    while (currNode != null) {
-//      System.out.println(currNode.data);
-//      currNode = currNode.next;
-//    }
-    System.out.println(result.data);
+    cp2.deleteMiddleNode(d);
+    LinkedListNode currNode = a;
+
+    while (currNode != null) {
+      System.out.println(currNode.data);
+      currNode = currNode.next;
+    }
+//    System.out.println(result.data);
   }
 }
