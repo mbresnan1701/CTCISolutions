@@ -52,25 +52,48 @@ public class ChapterTwo {
   public static LinkedListNode kthToLast(LinkedListNode head, int k) {
     // Iterate through the list once to get the size of the list, once we have the size,
     // we can calculate the "index" of the kth to last element and return that
-    int size = listSize(head);
-    int targetIndex = (size - 1) - k;
-    int currentIndex = 0;
-    LinkedListNode currentNode = head;
-
-    // If k is greater than the list size, we go "out of bounds" so to speak. Just return the head.
-    if(targetIndex <= 0) {
-      return head;
-    }
-
-    while (currentNode != null) {
-      if (currentIndex == targetIndex) {
-        break;
-      }
-      currentIndex++;
-      currentNode = currentNode.next;
-    }
-    return currentNode;
+//    int size = listSize(head);
+//    int targetIndex = (size - 1) - k;
+//    int currentIndex = 0;
+//    LinkedListNode currentNode = head;
+//
+//    // If k is greater than the list size, we go "out of bounds" so to speak. Just return the head.
+//    if(targetIndex <= 0) {
+//      return head;
+//    }
+//
+//    while (currentNode != null) {
+//      if (currentIndex == targetIndex) {
+//        break;
+//      }
+//      currentIndex++;
+//      currentNode = currentNode.next;
+//    }
+//    return currentNode;
     // Time complexity O(n)
+    // On reflection, it would be more efficient to iterate only once, but store two pointers and move them both
+    // Move a pointer k nodes ahead, then iterate from there and when we hit the end, we have our result
+
+    LinkedListNode p0 = head;
+    LinkedListNode p1 = head;
+
+    // Set up our second pointer with incremented position
+    for(int i = 0; i < k; i++) {
+      if(p1.next == null) {
+        // OOB
+        return head;
+      }
+      p1 = p1.next;
+    }
+
+    while (p1.next != null) {
+      p0 = p0.next;
+      p1 = p1.next;
+    }
+
+    return p0;
+
+    // This is still O(n) simplified, but more efficient than our last algo.
   }
 
   // Helper func for 2.2, though it'll probably have more uses

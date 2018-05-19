@@ -25,7 +25,7 @@ public class Main {
     f.setNext(g);
     g.setNext(h);
 
-    LinkedListNode result = cp2.kthToLast(a, 0);
+    LinkedListNode result = cp2.kthToLast(a, 2);
 //    LinkedListNode currNode = a;
 //
 //    while (currNode != null) {
