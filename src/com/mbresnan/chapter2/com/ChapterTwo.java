@@ -111,15 +111,14 @@ public class ChapterTwo {
   // not necessarily the exact middle) of a SLL given only access to that node
   public static void deleteMiddleNode(LinkedListNode node) {
     // Since we cannot update the ref to this node in the prev node, we cannot "delete" it.
-    // We'll have to update the list in place and then delete the final element
-    LinkedListNode currentNode = node;
-    while (currentNode != null) {
-      currentNode.data = currentNode.next.data;
-      if(currentNode.next.next == null) {
-        currentNode.next = null;
-      }
-      currentNode = currentNode.next;
+    // We'll have to update the node in place and then delete the next node
+    if (node == null || node.next == null) {
+      // Someone input the last element in a list or node is null
+      return;
     }
-    // Time complexity O(n). Have to iterate through all elements of the remaining list
+
+    node.data = node.next.data;
+    node.next = node.next.next;
+    // Time complexity O(1).
   }
 }
