@@ -25,12 +25,13 @@ public class Main {
     f.setNext(g);
     g.setNext(h);
 
-    cp2.removeDupes(a);
-    LinkedListNode currNode = a;
-
-    while (currNode != null) {
-      System.out.println(currNode.data);
-      currNode = currNode.next;
-    }
+    LinkedListNode result = cp2.kthToLast(a, 0);
+//    LinkedListNode currNode = a;
+//
+//    while (currNode != null) {
+//      System.out.println(currNode.data);
+//      currNode = currNode.next;
+//    }
+    System.out.println(result.data);
   }
 }
