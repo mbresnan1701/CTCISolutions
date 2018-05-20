@@ -26,8 +26,13 @@ public class Main {
     g.setNext(h);
 
     cp2.deleteMiddleNode(d);
-    LinkedListNode currNode = a;
 
+    LinkedListNode currNode = a;
+//    System.out.println(a.size());
+    a.append(10);
+    a.append(66);
+//    System.out.println(a.size());
+    currNode = cp2.partition(currNode, 6);
     while (currNode != null) {
       System.out.println(currNode.data);
       currNode = currNode.next;

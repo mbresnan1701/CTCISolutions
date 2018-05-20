@@ -42,4 +42,42 @@ public class LinkedListNode {
     LinkedListNode head2 = new LinkedListNode(data, next2, null);
     return head2;
   }
+
+  public boolean append(int x) {
+    return append(this, x);
+  }
+
+  public boolean append(LinkedListNode node, int x) {
+    if(node.next == null) {
+      node.setNext(new LinkedListNode(x));
+      return true;
+    } else {
+      return node.next.append(node.next, x);
+    }
+  }
+
+  public boolean appendNode(LinkedListNode newNode) {
+    return appendNode(this, newNode);
+  }
+
+  public boolean appendNode(LinkedListNode node, LinkedListNode newNode) {
+    if(node.next == null) {
+      node.setNext(newNode);
+      return true;
+    } else {
+      return node.next.appendNode(node.next, newNode);
+    }
+  }
+
+  public int size() {
+    return size(this, 1);
+  }
+
+  public int size(LinkedListNode node, int x) {
+    if (node.next == null) {
+      return x;
+    } else {
+      return size(node.next, x + 1);
+    }
+  }
 }

@@ -121,4 +121,44 @@ public class ChapterTwo {
     node.next = node.next.next;
     // Time complexity O(1).
   }
+
+  // 2.4 Write code to partition a LL around a value x, such that all nodes less than x come before all nodes GTE
+  // to x. If x is contained within the list, the values of x only need to be after the elements less than x. The
+  // partition element x can appear anywhere in the "right partition"; it does not need to appear between the left
+  // and right partitions
+  public static LinkedListNode partition(LinkedListNode head, int x) {
+    // First thought is to construct two new linked lists and join them at the end. Takes up N space, but is far
+    // simpler than trying to rearrange the list in place.
+    LinkedListNode currentNode = head;
+    LinkedListNode leftPartition = null;
+    LinkedListNode rightPartition = null;
+    while (currentNode != null) {
+      if(currentNode.data < x) {
+        if(leftPartition == null) {
+          leftPartition = new LinkedListNode(currentNode.data);
+        } else {
+          leftPartition.append(currentNode.data);
+        }
+      } else {
+        if(rightPartition == null) {
+          rightPartition = new LinkedListNode(currentNode.data);
+        } else {
+          rightPartition.append(currentNode.data);
+        }
+      }
+      currentNode = currentNode.next;
+    }
+
+    if (leftPartition == null) {
+      // All values GTE x
+      return rightPartition;
+    } else if (rightPartition == null) {
+      // All values LT x
+      return leftPartition;
+    } else {
+      // Else merge the partitions
+      leftPartition.appendNode(rightPartition);
+      return leftPartition;
+    }
+  }
 }
