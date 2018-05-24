@@ -78,8 +78,8 @@ public class ChapterTwo {
     LinkedListNode p1 = head;
 
     // Set up our second pointer with incremented position
-    for(int i = 0; i < k; i++) {
-      if(p1.next == null) {
+    for (int i = 0; i < k; i++) {
+      if (p1.next == null) {
         // OOB
         return head;
       }
@@ -133,14 +133,14 @@ public class ChapterTwo {
     LinkedListNode leftPartition = null;
     LinkedListNode rightPartition = null;
     while (currentNode != null) {
-      if(currentNode.data < x) {
-        if(leftPartition == null) {
+      if (currentNode.data < x) {
+        if (leftPartition == null) {
           leftPartition = new LinkedListNode(currentNode.data);
         } else {
           leftPartition.append(currentNode.data);
         }
       } else {
-        if(rightPartition == null) {
+        if (rightPartition == null) {
           rightPartition = new LinkedListNode(currentNode.data);
         } else {
           rightPartition.append(currentNode.data);
@@ -161,4 +161,46 @@ public class ChapterTwo {
       return leftPartition;
     }
   }
+
+  // 2.5 You have 2 numbers represented by a linked list, where each node contains a single digit
+  // The digits are stored in reverse order such that the 1's digit is at the head of the list.
+  // Write a fn that adds the two numbers and returns the sum as a linked list.
+  public static LinkedListNode sumLists(LinkedListNode x, LinkedListNode y) {
+    // Initial thought is to loop through LL to construct the x + y values, then add to get our result
+    // then basically do the reverse to construct the result LL.
+    String xStr, yStr;
+    xStr = yStr = "";
+    char[] resultDigits;
+    LinkedListNode resultList = null;
+    LinkedListNode currentNode = x;
+
+    // Get string representation of X
+    while (currentNode != null) {
+      xStr = currentNode.data + xStr;
+      currentNode = currentNode.next;
+    }
+
+    // Get string representation of Y
+    currentNode = y;
+    while (currentNode != null) {
+      yStr = currentNode.data + yStr;
+      currentNode = currentNode.next;
+    }
+
+    // Convert x and y strs to ints and sum. Then break into a character array so we can create the new LL
+    resultDigits = (String.valueOf(Integer.valueOf(xStr) + Integer.valueOf(yStr))).toCharArray();
+
+    // Loop through digits array and construct the result LL
+    for (int i = resultDigits.length - 1; i >= 0; i--) {
+      if (resultList == null) {
+        resultList = new LinkedListNode(Integer.parseInt(Character.toString(resultDigits[i])));
+      } else {
+        resultList.append(Integer.parseInt(Character.toString(resultDigits[i])));
+      }
+    }
+    return resultList;
+    // Time complexity O(n). There are probably slight improvements that can be made here. We're doing lots of
+    // conversions, plus the three loops, and that's adding some time and space.
+  }
+
 }
