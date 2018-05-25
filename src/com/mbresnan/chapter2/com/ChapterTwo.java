@@ -2,8 +2,10 @@ package com.mbresnan.chapter2.com;
 
 import com.mbresnan.library.com.LinkedListNode;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 
 public class ChapterTwo {
   // 2.1 Write code to remove duplicates from an unsorted linked list. How would you solve this problem if a temp
@@ -201,6 +203,34 @@ public class ChapterTwo {
     return resultList;
     // Time complexity O(n). There are probably slight improvements that can be made here. We're doing lots of
     // conversions, plus the three loops, and that's adding some time and space.
+  }
+
+  // 2.6 Write a function to check if a linked list is a palindrome.
+  public static boolean isPalindrome(LinkedListNode node) {
+    // Same thing as checking a string, only slightly more involved because we need to grab values from the LL
+    // and create a new arraylist of values to check
+    LinkedListNode currentNode = node;
+    List<Integer> values = new ArrayList<>();
+
+    // Get data from the nodes
+    while (currentNode != null) {
+      values.add(currentNode.data);
+      currentNode = currentNode.next;
+    }
+
+    int startPointer = 0;
+    int endPointer = values.size() - 1;
+    // Iterate through values list storing 2 pointers to compare values from outside inwards
+    while (startPointer < endPointer) {
+      if (!values.get(startPointer).equals(values.get(endPointer))) {
+        return false;
+      }
+      startPointer++;
+      endPointer--;
+    }
+
+    return true;
+    // Solution is O(n)
   }
 
 }
