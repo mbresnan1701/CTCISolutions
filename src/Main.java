@@ -18,15 +18,16 @@ public class Main {
     LinkedListNode h = new LinkedListNode(6);
 
     a.setNext(b);
-    b.setNext(c);
+    b.setNext(d);
+
 //    c.setNext(d);
-//    d.setNext(e);
-//    e.setNext(f);
+    d.setNext(e);
+    e.setNext(f);
 //    f.setNext(g);
 //    g.setNext(h);
 
 //    LinkedListNode currNode = cp2.sumLists(a,c);
-    System.out.println(cp2.isPalindrome(a));
+    System.out.println(cp2.intersection(a, d));
 //    while (currNode != null) {
 //      System.out.println("D is : " + currNode.data);
 //      currNode = currNode.next;

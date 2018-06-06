@@ -233,4 +233,30 @@ public class ChapterTwo {
     // Solution is O(n)
   }
 
+  // 2.7 Given two singly linked lists, determine if the two lists intersect, and return the intersecting node.
+  // Intersection is based on reference, and not value
+  public static LinkedListNode intersection(LinkedListNode x, LinkedListNode y) {
+    // Initial thought is to grab a set of all the memory addresses in x, then iterate through y and see
+    // if any nodes have a memory addr from x, if so, then return that node, else return null
+    HashSet<String> seenAddresses = new HashSet<>();
+    LinkedListNode currentNode;
+
+    currentNode = x;
+    while (currentNode != null) {
+      seenAddresses.add(currentNode.toString());
+      currentNode = currentNode.next;
+    }
+
+    currentNode = y;
+    while (currentNode != null) {
+      if (seenAddresses.contains(currentNode.toString())) {
+        return currentNode;
+      }
+      currentNode = currentNode.next;
+    }
+
+    return null;
+    // O(n) time in worst case, memory is O(n) where n is the number of elements in x.  
+  }
+
 }
