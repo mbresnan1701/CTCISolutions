@@ -256,7 +256,24 @@ public class ChapterTwo {
     }
 
     return null;
-    // O(n) time in worst case, memory is O(n) where n is the number of elements in x.  
+    // O(n) time in worst case, memory is O(n) where n is the number of elements in x.
+  }
+
+  // 2.8 Given a circular linked list, implement an algo that returns the node at the beginning of the loop.
+  public static LinkedListNode loopDetection(LinkedListNode x) {
+    HashSet<String> seenNodes = new HashSet<>();
+    LinkedListNode currentNode = x;
+
+    while (currentNode != null) {
+      if (seenNodes.contains(currentNode.toString())) {
+        return currentNode;
+      } else {
+        seenNodes.add(currentNode.toString());
+      }
+      currentNode = currentNode.next;
+    }
+
+    return x;
   }
 
 }

@@ -18,16 +18,16 @@ public class Main {
     LinkedListNode h = new LinkedListNode(6);
 
     a.setNext(b);
-    b.setNext(d);
+    b.setNext(c);
 
-//    c.setNext(d);
-    d.setNext(e);
-    e.setNext(f);
+    c.setNext(d);
+    d.setNext(b);
+//    e.setNext(f);
 //    f.setNext(g);
 //    g.setNext(h);
 
 //    LinkedListNode currNode = cp2.sumLists(a,c);
-    System.out.println(cp2.intersection(a, d));
+    System.out.println(cp2.loopDetection(a).data);
 //    while (currNode != null) {
 //      System.out.println("D is : " + currNode.data);
 //      currNode = currNode.next;
