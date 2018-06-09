@@ -1,9 +1,8 @@
-package com.mbresnan.chapter2.com;
+package com.mbresnan.chapter2;
 
-import com.mbresnan.library.com.LinkedListNode;
+import com.mbresnan.library.LinkedListNode;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 

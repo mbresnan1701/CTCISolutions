@@ -1,6 +1,6 @@
-import com.mbresnan.chapter1.com.ChapterOne;
-import com.mbresnan.chapter2.com.ChapterTwo;
-import com.mbresnan.library.com.LinkedListNode;
+import com.mbresnan.chapter1.ChapterOne;
+import com.mbresnan.chapter2.ChapterTwo;
+import com.mbresnan.library.LinkedListNode;
 
 public class Main {
 

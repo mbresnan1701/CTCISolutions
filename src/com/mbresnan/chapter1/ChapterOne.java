@@ -1,4 +1,4 @@
-package com.mbresnan.chapter1.com;
+package com.mbresnan.chapter1;
 
 import java.util.Arrays;
 import java.util.Collection;

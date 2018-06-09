@@ -1,4 +1,4 @@
-package com.mbresnan.library.com;
+package com.mbresnan.library;
 
 public class LinkedListNode {
   public LinkedListNode next, prev, last;
