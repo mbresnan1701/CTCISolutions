@@ -8,29 +8,34 @@ public class Main {
     ChapterOne cp1 = new ChapterOne();
     ChapterTwo cp2 = new ChapterTwo();
 
-    LinkedListNode a = new LinkedListNode(6);
-    LinkedListNode b = new LinkedListNode(9);
-    LinkedListNode c = new LinkedListNode(6);
-    LinkedListNode d = new LinkedListNode(6);
-    LinkedListNode e = new LinkedListNode(7);
-    LinkedListNode f = new LinkedListNode(1);
-    LinkedListNode g = new LinkedListNode(2);
-    LinkedListNode h = new LinkedListNode(6);
-
-    a.setNext(b);
-    b.setNext(c);
-
-    c.setNext(d);
-    d.setNext(b);
+//    LinkedListNode a = new LinkedListNode(6);
+//    LinkedListNode b = new LinkedListNode(9);
+//    LinkedListNode c = new LinkedListNode(6);
+//    LinkedListNode d = new LinkedListNode(6);
+//    LinkedListNode e = new LinkedListNode(7);
+//    LinkedListNode f = new LinkedListNode(1);
+//    LinkedListNode g = new LinkedListNode(2);
+//    LinkedListNode h = new LinkedListNode(6);
+//
+//    a.setNext(b);
+//    b.setNext(c);
+//
+//    c.setNext(d);
+//    d.setNext(b);
 //    e.setNext(f);
 //    f.setNext(g);
 //    g.setNext(h);
 
 //    LinkedListNode currNode = cp2.sumLists(a,c);
-    System.out.println(cp2.loopDetection(a).data);
+//    System.out.println(cp2.loopDetection(a).data);
 //    while (currNode != null) {
 //      System.out.println("D is : " + currNode.data);
 //      currNode = currNode.next;
 //    }
+    int[] a = new int[10];
+    for(Integer x : a) {
+      System.out.println(x);
+
+    }
   }
 }
