@@ -1,12 +1,17 @@
 import com.mbresnan.chapter1.ChapterOne;
 import com.mbresnan.chapter2.ChapterTwo;
+import com.mbresnan.chapter3.ChapterThree;
 import com.mbresnan.library.LinkedListNode;
+
+import java.util.ArrayList;
+import java.util.Stack;
 
 public class Main {
 
   public static void main(String[] args) {
     ChapterOne cp1 = new ChapterOne();
     ChapterTwo cp2 = new ChapterTwo();
+    ChapterThree cp3 = new ChapterThree();
 
 //    LinkedListNode a = new LinkedListNode(6);
 //    LinkedListNode b = new LinkedListNode(9);
@@ -32,10 +37,11 @@ public class Main {
 //      System.out.println("D is : " + currNode.data);
 //      currNode = currNode.next;
 //    }
-    int[] a = new int[10];
-    for(Integer x : a) {
-      System.out.println(x);
 
+
+    int[] a = new int[50];
+    for(Integer x : a) {
     }
+
   }
 }

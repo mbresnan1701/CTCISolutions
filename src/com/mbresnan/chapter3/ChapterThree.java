@@ -1,5 +1,6 @@
 package com.mbresnan.chapter3;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class ChapterThree {
@@ -21,32 +22,82 @@ public class ChapterThree {
 
     private Stack<Integer> minimums;
 
-    public stack3_2 () {
+    public stack3_2() {
       super();
       minimums = new Stack<>();
     }
 
     public void pushValue(Integer x) {
       super.push(x);
-      if(x <= min()) {
+      if (x <= min()) {
         minimums.push(x);
       }
     }
 
     public Integer popValue() {
       int stackTop = super.pop();
-      if(stackTop == min()) {
+      if (stackTop == min()) {
         minimums.pop();
       }
       return stackTop;
     }
 
     public int min() {
-      if(minimums.isEmpty()) {
+      if (minimums.isEmpty()) {
         return Integer.MAX_VALUE;
       }
-      
+
       return minimums.peek();
     }
+  }
+
+  // 3.3 Imagine a stack of plates. If the stack gets too high, it might topple. Therefore, IRL, we would likely
+  // start a new stack when the previous stack exceeds some threshold. Implement a data structure, SetOfStacks, that
+  // mimics this. SetOfStacks should be composed of several stacks, and create a new stack once the previous one
+  // exceeds capacity. Push and Pop should behave identically to a single stack.
+  class SetOfStacks {
+    private int capacity;
+    private ArrayList<Stack> stacks = new ArrayList<>();
+
+    public SetOfStacks() {
+      this(10);
+    }
+
+    public SetOfStacks(Integer max) {
+      this.capacity = max;
+      stacks.add(new Stack<Integer>());
+    }
+
+    public void push(Integer x) {
+      Stack<Integer> currentStack = stacks.get(stacks.size() - 1);
+      if (currentStack.size() == capacity) {
+        stacks.add(new Stack<Integer>());
+        currentStack = stacks.get(stacks.size() - 1);
+      }
+
+      currentStack.push(x);
+    }
+
+    public int pop() {
+      Stack<Integer> currentStack = stacks.get(stacks.size() - 1);
+
+      // No values in any stack. Just return a junk value
+      if (currentStack.size() == 0 && stacks.size() == 1) {
+        return Integer.MIN_VALUE;
+      }
+
+      if (currentStack.size() == 0 && stacks.size() > 1) {
+        stacks.remove(stacks.size() - 1);
+        currentStack = stacks.get(stacks.size() - 1);
+      }
+
+      return currentStack.pop();
+    }
+
+    public int stackCount() {
+      return this.stacks.size();
+    }
+
+
   }
 }
