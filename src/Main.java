@@ -8,10 +8,10 @@ import java.util.Stack;
 
 public class Main {
 
-  public static void main(String[] args) {
-    ChapterOne cp1 = new ChapterOne();
-    ChapterTwo cp2 = new ChapterTwo();
-    ChapterThree cp3 = new ChapterThree();
+    public static void main(String[] args) {
+        ChapterOne cp1 = new ChapterOne();
+        ChapterTwo cp2 = new ChapterTwo();
+        ChapterThree cp3 = new ChapterThree();
 
 //    LinkedListNode a = new LinkedListNode(6);
 //    LinkedListNode b = new LinkedListNode(9);
@@ -39,9 +39,9 @@ public class Main {
 //    }
 
 
-    int[] a = new int[50];
-    for(Integer x : a) {
-    }
+        int[] a = new int[50];
+        for (Integer x : a) {
+        }
 
-  }
+    }
 }
