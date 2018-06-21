@@ -39,9 +39,5 @@ public class Main {
 //    }
 
 
-        int[] a = new int[50];
-        for (Integer x : a) {
-        }
-
     }
 }

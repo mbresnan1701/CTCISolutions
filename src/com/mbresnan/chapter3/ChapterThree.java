@@ -143,4 +143,42 @@ public class ChapterThree {
         }
 
     }
+
+    // 3.5 Write a program to sort a stack such that the smallest items are on top. You can use an
+    // additional temporary stack, but you may not copy the elements into any other data structure. The stack
+    // supports the following ops: push, pop, peek, isEmpty
+    class SortableStack {
+        private Stack<Integer> stack;
+
+        SortableStack() {
+            stack = new Stack<>();
+        }
+
+        public void push(int x) {
+            Stack<Integer> tempStack = new Stack<>();
+            if (stack.isEmpty() || x <= stack.peek()) {
+                stack.push(x);
+            } else {
+                while (!stack.isEmpty() && stack.peek() < x) {
+                    tempStack.push(stack.pop());
+                }
+                stack.push(x);
+                while (!tempStack.isEmpty()) {
+                    stack.push(tempStack.pop());
+                }
+            }
+        }
+
+        public int pop() {
+            return stack.pop();
+        }
+
+        public int peek() {
+            return stack.peek();
+        }
+
+        public boolean isEmpty() {
+            return stack.isEmpty();
+        }
+    }
 }
