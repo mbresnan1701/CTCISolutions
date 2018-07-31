@@ -38,6 +38,11 @@ public class Main {
 //      currNode = currNode.next;
 //    }
 
+        System.out.println(cp1.numberOfDecodes("12345"));
+        // 1 2 3 4 5
+        // 12 3 4 5
+        // 1 23 4 5
+
 
     }
 }

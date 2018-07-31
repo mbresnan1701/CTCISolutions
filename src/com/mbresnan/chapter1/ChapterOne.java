@@ -303,6 +303,26 @@ public class ChapterOne {
         // Time complexity is O(n^2)
     }
 
+    // BONUS!!!
+    // Facebook interview question:
+    // Given an encoded string such as '12' where each letter maps to a number e.g. 'a' == 0 'b' == 1 etc
+    // Write a function that given an 'encoded' string, return the number of ways it can be decoded.
+    public static int numberOfDecodes(String data) {
+         if (data.length() <= 1) {
+            return 1;
+        } else {
+            int combinationNum = Integer.parseInt(String.valueOf(data.charAt(0)) + String.valueOf(data.charAt(1)));
+            if(combinationNum >= 0 && combinationNum <= 25) {
+                return  numberOfDecodes(data.substring(1)) + numberOfDecodes(data.substring(2));
+            }
+            return numberOfDecodes(data.substring(1));
+        }
+    }
+
+    // One optimization we could make is add a second param to this function such that we pass the number of chars
+    // to parse in the string e.g. numberOfDecodes(data, data.length - k) where k is a decreasing value corresponding to
+    // number of chars left in the string yet to be parsed. This would save a bit on memory as we don't need to create
+    // substrings.
 }
 
 
