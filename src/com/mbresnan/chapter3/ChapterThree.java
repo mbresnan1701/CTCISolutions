@@ -2,6 +2,7 @@ package com.mbresnan.chapter3;
 
 import java.util.ArrayList;
 import java.util.EmptyStackException;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class ChapterThree {
@@ -181,4 +182,102 @@ public class ChapterThree {
             return stack.isEmpty();
         }
     }
+
+    // 3.6 An animal shelter, which holds only dogs and cats, operates on a strictly FIFO basis. People must adopt
+    // the "oldest"(arrival time) of all animals at the shelter, or they can select whether they prefer dogs or cats
+    // and will receive the oldest animal of that type. Create the data structures to maintain the system, and implement
+    // operations such as enqueue, dequeueAny, dequeueDog, and dequeueCat. You may use the built in LinkedList data struct
+    class Animal {
+        // We could make separate classes for dogs and cats, but in this case it doesn't much matter.
+        // We only care about two values which are both shared between cats and dogs.
+        private int timeAdded;
+        private String type;
+
+        Animal(String type, int time) {
+            this.type = type;
+            this.timeAdded = time;
+        }
+
+        public int getTimeAdded() {
+            return timeAdded;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
+
+    class AnimalShelter {
+        private LinkedList<Animal> catQueue;
+        private LinkedList<Animal> dogQueue;
+        private Animal oldestAnimal = null; // TODO: refactor this to string. No need to store whole object
+        private int animalsAdded = 0; // For determining our "time". Oldest animals are lower numbers.
+
+        AnimalShelter() {
+            this.catQueue = new LinkedList<>();
+            this.dogQueue = new LinkedList<>();
+        }
+
+        public void enqueue(String type) {
+            Animal newAnimal = new Animal(type, animalsAdded++);
+
+            if (oldestAnimal == null) {
+                oldestAnimal = newAnimal;
+            }
+
+            if (type.equals("dog")) {
+                dogQueue.push(newAnimal);
+            } else if (type.equals("cat")) {
+                catQueue.push(newAnimal);
+            }
+        }
+
+        public Animal dequeueType(String type) {
+            Animal removedAnimal = null;
+            if (type.equals("dog")) {
+                if (dogQueue.size() > 0) {
+                    removedAnimal = dogQueue.removeLast();
+                }
+            } else if (type.equals("cat")) {
+                if (catQueue.size() > 0) {
+                    removedAnimal = catQueue.removeLast();
+                }
+            }
+
+            this.calculateOldest();
+            return removedAnimal;
+        }
+
+        public Animal dequeueAny() {
+            if (oldestAnimal == null) {
+                return null;
+            } else {
+                Animal removedAnimal = null;
+                if (oldestAnimal.getType().equals("dog")) {
+                    removedAnimal = dogQueue.removeLast();
+                } else if (oldestAnimal.getType().equals("cat")) {
+                    removedAnimal = catQueue.removeLast();
+                }
+                this.calculateOldest();
+                return removedAnimal;
+            }
+        }
+
+        private void calculateOldest() {
+            if (catQueue.size() == 0 && dogQueue.size() == 0) {
+                oldestAnimal = null;
+            } else if (catQueue.size() > 0 && dogQueue.size() == 0) {
+                oldestAnimal = catQueue.peekLast();
+            } else if (catQueue.size() == 0) {
+                oldestAnimal = dogQueue.peekLast();
+            } else {
+                Animal oldestCat = catQueue.peekLast();
+                Animal oldestDog = dogQueue.peekLast();
+                oldestAnimal = oldestCat.getTimeAdded() < oldestDog.getTimeAdded() ?
+                        oldestCat : oldestDog;
+            }
+        }
+    }
+
+
 }
